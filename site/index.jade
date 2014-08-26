@@ -11,7 +11,7 @@ html
         h1 Waitstaff Calculator
 
       .row
-        .column.sm-7
+        .col-sm-7
           .panel
             h2 Enter the Meal Details
             form.form-horizontal(ng-controller="TipHader")
@@ -31,8 +31,8 @@ html
               button.btn.btn-primary(type="submit", value="Submit") Submit
               button.btn Cancel
 
-        .column.sm-5
-          .panel
+        .col-sm-5
+          .well
             h2 Customer Charges
             dl.dl-horizontal
 
@@ -45,7 +45,7 @@ html
               dt Total
               dd 0.00
 
-          .panel
+          .well
             h2 My Earnings Info
             dl.dl-horizontal
 
@@ -58,7 +58,7 @@ html
               dt Average Tip Per meal
               dd 0.00
 
-      button.btn.right Reset
+      button.btn.pull-right Reset
 
 
     script(src="http://code.jquery.com/jquery-2.0.3.min.js")
