@@ -1,0 +1,66 @@
+!!! 5
+html
+  head
+    title Thinkful Waitstaff Calculator
+    link(href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css", rel="stylesheet")
+    link(href="css/styles.css", rel="stylesheet")
+
+  body
+    .container
+      header
+        h1 Waitstaff Calculator
+
+      .row
+        .column.sm-7
+          .panel
+            h2 Enter the Meal Details
+            form.form-horizontal(ng-controller="TipHader")
+              .form-group
+                label.control-label Base Meal Price: $
+                input.form-control(type="number")
+
+              .form-group
+                label.control-label Tax Rate: %
+                input.form-control(type="number")
+
+              .form-group
+                label.control-label Tip Percentage: %
+                input.form-control(type="number")    
+
+            .form-group
+              button.btn.btn-primary(type="submit", value="Submit") Submit
+              button.btn Cancel
+
+        .column.sm-5
+          .panel
+            h2 Customer Charges
+            dl.dl-horizontal
+
+              dt Subtotal
+              dd 0.00
+
+              dt Tip
+              dd 0.00
+
+              dt Total
+              dd 0.00
+
+          .panel
+            h2 My Earnings Info
+            dl.dl-horizontal
+
+              dt Tip Total
+              dd 0.00
+
+              dt Meal Count
+              dd 0
+
+              dt Average Tip Per meal
+              dd 0.00
+
+      button.btn.right Reset
+
+
+    script(src="http://code.jquery.com/jquery-2.0.3.min.js")
+    script(src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.21/angular.min.js")
+    script(src="js/calcApp.js")

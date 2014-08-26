@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Thinkful Waitstaff Calculator</title>
+    <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/styles.css" rel="stylesheet">
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>Waitstaff Calculator</h1>
+      </header>
+      <div class="row">
+        <div class="column sm-7">
+          <div class="panel">
+            <h2>Enter the Meal Details</h2>
+            <form ng-controller="TipHader" class="form-horizontal">
+              <div class="form-group">
+                <label class="control-label">Base Meal Price: $</label>
+                <input type="number" class="form-control">
+              </div>
+              <div class="form-group">
+                <label class="control-label">Tax Rate: %</label>
+                <input type="number" class="form-control">
+              </div>
+              <div class="form-group">
+                <label class="control-label">Tip Percentage: %</label>
+                <input type="number" class="form-control">
+              </div>
+            </form>
+            <div class="form-group">
+              <button type="submit" value="Submit" class="btn btn-primary">Submit</button>
+              <button class="btn">Cancel</button>
+            </div>
+          </div>
+        </div>
+        <div class="column sm-5">
+          <div class="panel">
+            <h2>Customer Charges</h2>
+            <dl class="dl-horizontal">
+              <dt>Subtotal</dt>
+              <dd>0.00</dd>
+              <dt>Tip</dt>
+              <dd>0.00</dd>
+              <dt>Total</dt>
+              <dd>0.00</dd>
+            </dl>
+          </div>
+          <div class="panel">
+            <h2>My Earnings Info</h2>
+            <dl class="dl-horizontal">
+              <dt>Tip Total</dt>
+              <dd>0.00</dd>
+              <dt>Meal Count</dt>
+              <dd>0</dd>
+              <dt>Average Tip Per meal</dt>
+              <dd>0.00</dd>
+            </dl>
+          </div>
+        </div>
+      </div>
+      <button class="btn right">Reset</button>
+    </div>
+    <script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.21/angular.min.js"></script>
+    <script src="js/calcApp.js"></script>
+  </body>
+</html>
