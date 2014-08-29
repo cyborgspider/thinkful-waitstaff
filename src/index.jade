@@ -1,12 +1,12 @@
 !!! 5
-html
+html(ng-app="calcApp")
   head
     title Thinkful Waitstaff Calculator
     link(href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css", rel="stylesheet")
     link(href="css/styles.css", rel="stylesheet")
 
   body
-    .container
+    .container(ng-controller="calcCtrl")
       header
         h1 Waitstaff Calculator
 
@@ -14,22 +14,22 @@ html
         .col-sm-7
           .panel
             h2 Enter the Meal Details
-            form.form-horizontal(ng-controller="TipHader")
+            form.form-horizontal(ng-submit="submitForm()", name="priceForm", novalidate)
               .form-group
                 label.control-label Base Meal Price: $
-                input.form-control(type="number")
+                input.form-control(type="number", ng-model="data.base_price")
 
               .form-group
                 label.control-label Tax Rate: %
-                input.form-control(type="number")
+                input.form-control(type="number", ng-model="data.tax_rate")
 
               .form-group
                 label.control-label Tip Percentage: %
-                input.form-control(type="number")    
+                input.form-control(type="number", ng-model="data.tip_percentage")
 
-            .form-group
-              button.btn.btn-primary(type="submit", value="Submit") Submit
-              button.btn Cancel
+              .form-group
+                input.btn.btn-primary(type="submit", value="Submit") Submit
+                button.btn(ng-click="cancelInfo()") Cancel
 
         .col-sm-5
           .well
@@ -37,28 +37,28 @@ html
             dl.dl-horizontal
 
               dt Subtotal
-              dd 0.00
+              dd {{ data.customer_subtotal | currency }}
 
               dt Tip
-              dd 0.00
+              dd {{ data.tip | currency }}
 
               dt Total
-              dd 0.00
+              dd {{ data.meal_total | currency}}
 
           .well
             h2 My Earnings Info
             dl.dl-horizontal
 
               dt Tip Total
-              dd 0.00
+              dd {{ data.tip_total | currency}}
 
               dt Meal Count
-              dd 0
+              dd {{ data.meal_count}}
 
               dt Average Tip Per meal
-              dd 0.00
+              dd {{ data.average_tip_per_meal | currency }}
 
-      button.btn.pull-right Reset
+      button.btn.pull-right(ng-click="resetApp()") Reset
 
 
     script(src="http://code.jquery.com/jquery-2.0.3.min.js")

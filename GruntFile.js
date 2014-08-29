@@ -9,15 +9,15 @@ module.exports =function(grunt){
           livereload: true
         },
         js: {
-          files:   ['site/scripts/*.js'],
+          files:   ['src/scripts/*.js'],
           tasks:   ['copy']
         },
         css:{
-          files:   ['site/styles/*.styl'],
+          files:   ['src/styles/*.styl'],
           tasks:   ['stylus']
         },
         html:{
-          files:   ['site/*.jade'],
+          files:   ['src/*.jade'],
           tasks:   ['jade']
         }
       },
@@ -34,7 +34,7 @@ module.exports =function(grunt){
             import:['nib']
           },
           files: {
-            'build/css/styles.css': ['site/styles/*.styl'] // compile and concat into single file
+            'build/css/styles.css': ['src/styles/*.styl'] // compile and concat into single file
           }
         }
 
@@ -44,7 +44,7 @@ module.exports =function(grunt){
           options: {pretty:true},
           files:[{
             expand: true,
-            cwd:    'site/',
+            cwd:    'src/',
             src:    "*.jade",
             ext:    ".html",
             dest:   "build/"
