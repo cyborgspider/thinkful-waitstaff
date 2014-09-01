@@ -50,8 +50,14 @@ module.exports =function(grunt){
             dest:   "build/"
           }]
         }
+      },
+      'gh-pages': {
+        options: {
+          base: 'build'
+        },
+        src: ['**']
       }
-     });
+     });   
 
      //Register (load) the plugins to make them available in Grunt
      //matchdep makes this unnecessary, but it's added here for reference.
@@ -67,4 +73,5 @@ module.exports =function(grunt){
      //Copy is registered but not executed. Refer to commented code in the initConfig method for details on how to add it.
      grunt.registerTask('default', ['watch','stylus', 'jade', 'copy']);
      grunt.registerTask('build', ['stylus','jade', 'copy']);
+     grunt.registerTask('pages', ['build','gh-pages']);
 };
