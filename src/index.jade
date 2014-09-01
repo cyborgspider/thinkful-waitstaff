@@ -1,3 +1,4 @@
+
 !!! 5
 html(ng-app="calcApp")
   head
@@ -12,27 +13,33 @@ html(ng-app="calcApp")
         h1 TipiCal
 
       .panel
-        h2 Enter the Meal Details
-        form(ng-submit="submitForm()", name="priceForm", novalidate)
-          .form-group
-            label.control-label Base Meal Price ($)
-            input.form-control(type="number", ng-model="data.base_price")
+        section.main-section
+          h2 Enter the Meal Details
+          form(ng-submit="submitForm()", name="priceForm", novalidate)
+            .form-group
+              label.control-label Base Meal Price ($)
+              input.form-control(type="number", ng-model="data.base_price", required, name="base_price")
+              .error(ng-show="checkError('base_price')") Please place a valid number 
 
-          .form-group
-            label.control-label Tax Rate (%)
-            input.form-control(type="number", ng-model="data.tax_rate")
+            .form-group
+              label.control-label Tax Rate (%)
+              i.tip Just input this once, we'll remember it until you change it again!
+              input.form-control(type="number", ng-model="data.tax_rate", required, name="tax_rate")
+              .error(ng-show="checkError('tax_rate')") Please place a valid number
 
-          .form-group
-            label.control-label Tip Percentage (%)
-            input.form-control(type="number", ng-model="data.tip_percentage")
+            .form-group
+              label.control-label Tip Percentage (%)
+              input.form-control(type="number", ng-model="data.tip_percentage", required, name="tip_percentage")
+              .error(ng-show="checkError('tip_percentage')") Please place a valid number 
 
-          .form-group.text-center
-            input.btn.btn-primary(type="submit", value="Submit") Submit
-            button.btn(ng-click="cancelInfo()") Cancel
+            .form-group.form-actions
+              input.btn.btn-primary(type="submit", value="Submit") Submit
+              //- For John, cancelInfo increments the meal count?
+              button.btn(ng-click="cancelInfo()") Cancel
 
         section.sidebar
           h2 Customer Charges
-          dl.dl-horizontal
+          dl
 
             dt Subtotal
             dd {{ data.customer_subtotal | currency }}
@@ -40,12 +47,12 @@ html(ng-app="calcApp")
             dt Tip
             dd {{ data.tip | currency }}
 
-            dt Total
-            dd {{ data.meal_total | currency}}
+            dt.total Total
+            dd.total {{ data.meal_total | currency}}
 
       .panel.primary
         h2 My Earnings Info
-        dl.dl-horizontal
+        dl
 
           dt Tip Total
           dd {{ data.tip_total | currency}}

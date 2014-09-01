@@ -16,17 +16,19 @@ angular.module('calcApp',[])
     };
 
     $scope.calcCustomerCharge = function(){
-      $scope.calcSubTotal();
-      $scope.increaseMealCount();
-      $scope.calcTip();
-      $scope.calcMealTotal();
-      $scope.updateTipCollection();
-      $scope.calcTotalTip();
-      $scope.calcAverageTip();
+      if($scope.priceForm.$valid){
+        $scope.calcSubTotal();
+        $scope.increaseMealCount();
+        $scope.calcTip();
+        $scope.calcMealTotal();
+        $scope.updateTipCollection();
+        $scope.calcTotalTip();
+        $scope.calcAverageTip();
+      }
     };
 
     $scope.calcSubTotal = function(){
-      $scope.data.customer_subtotal = $scope.data.base_price * (10 * ($scope.data.tax_rate/100));
+      $scope.data.customer_subtotal = $scope.data.base_price + (10 * ($scope.data.tax_rate/100));
     };
 
     $scope.increaseMealCount = function(){
@@ -34,7 +36,7 @@ angular.module('calcApp',[])
     };
 
     $scope.calcMealTotal = function(){
-      $scope.data.meal_total = $scope.data.base_price + ($scope.data.tax_rate/100) + ($scope.data.base_price * ($scope.data.tip_percentage/100));
+      $scope.data.meal_total = $scope.data.base_price + (10 * ($scope.data.tax_rate/100)) + $scope.data.tip;
     };
 
     $scope.updateTipCollection = function(){
@@ -51,12 +53,12 @@ angular.module('calcApp',[])
       for(var i=0, len = $scope.data.tip_collection.length ; i < len; i++){
         // $scope.data.tip_total += $scope.data.tip_collection[i];
         total += $scope.data.tip_collection[i];
-      };
+      }
       $scope.data.tip_total = total;
     };
 
     $scope.calcAverageTip = function(){
-      $scope.data.average_tip_per_meal = ($scope.data.tip_total/$scope.data.tip_collection.length)
+      $scope.data.average_tip_per_meal = ($scope.data.tip_total/$scope.data.tip_collection.length);
     };
 
     $scope.submitForm = function(){
@@ -64,10 +66,19 @@ angular.module('calcApp',[])
         $scope.calcCustomerCharge();
     };
 
+    $scope.cancelInfo = function(){
+      $scope.submitted = false;
+      $scope.priceForm.$setPristine();
+    };
+
     $scope.resetApp = function(){
       $scope.data      = {};
       $scope.submitted = false;
       $scope.priceForm.$setPristine();
+    };
+
+    $scope.checkError = function(formItemName){
+      return $scope.$eval('submitted && priceForm.'+formItemName+'.$error.required');
     };
 
   });

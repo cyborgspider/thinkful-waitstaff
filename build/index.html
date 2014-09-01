@@ -11,40 +11,45 @@
         <h1>TipiCal</h1>
       </header>
       <div class="panel">
-        <h2>Enter the Meal Details</h2>
-        <form ng-submit="submitForm()" name="priceForm" novalidate>
-          <div class="form-group">
-            <label class="control-label">Base Meal Price ($)</label>
-            <input type="number" ng-model="data.base_price" class="form-control">
-          </div>
-          <div class="form-group">
-            <label class="control-label">Tax Rate (%)</label>
-            <input type="number" ng-model="data.tax_rate" class="form-control">
-          </div>
-          <div class="form-group">
-            <label class="control-label">Tip Percentage (%)</label>
-            <input type="number" ng-model="data.tip_percentage" class="form-control">
-          </div>
-          <div class="form-group text-center">
-            <input type="submit" value="Submit" class="btn btn-primary">
-            <button ng-click="cancelInfo()" class="btn">Cancel</button>
-          </div>
-        </form>
+        <section class="main-section">
+          <h2>Enter the Meal Details</h2>
+          <form ng-submit="submitForm()" name="priceForm" novalidate>
+            <div class="form-group">
+              <label class="control-label">Base Meal Price ($)</label>
+              <input type="number" ng-model="data.base_price" required name="base_price" class="form-control">
+              <div ng-show="checkError('base_price')" class="error">Please place a valid number </div>
+            </div>
+            <div class="form-group">
+              <label class="control-label">Tax Rate (%)</label><i class="tip">Just input this once, we'll remember it until you change it again!</i>
+              <input type="number" ng-model="data.tax_rate" required name="tax_rate" class="form-control">
+              <div ng-show="checkError('tax_rate')" class="error">Please place a valid number</div>
+            </div>
+            <div class="form-group">
+              <label class="control-label">Tip Percentage (%)</label>
+              <input type="number" ng-model="data.tip_percentage" required name="tip_percentage" class="form-control">
+              <div ng-show="checkError('tip_percentage')" class="error">Please place a valid number </div>
+            </div>
+            <div class="form-group form-actions">
+              <input type="submit" value="Submit" class="btn btn-primary">
+              <button ng-click="cancelInfo()" class="btn">Cancel</button>
+            </div>
+          </form>
+        </section>
         <section class="sidebar">
           <h2>Customer Charges</h2>
-          <dl class="dl-horizontal">
+          <dl>
             <dt>Subtotal</dt>
             <dd>{{ data.customer_subtotal | currency }}</dd>
             <dt>Tip</dt>
             <dd>{{ data.tip | currency }}</dd>
-            <dt>Total</dt>
-            <dd>{{ data.meal_total | currency}}</dd>
+            <dt class="total">Total</dt>
+            <dd class="total">{{ data.meal_total | currency}}</dd>
           </dl>
         </section>
       </div>
       <div class="panel primary">
         <h2>My Earnings Info</h2>
-        <dl class="dl-horizontal">
+        <dl>
           <dt>Tip Total</dt>
           <dd>{{ data.tip_total | currency}}</dd>
           <dt>Meal Count</dt>
