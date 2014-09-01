@@ -10,7 +10,7 @@
       <header>
         <h1>TipiCal</h1>
       </header>
-      <div class="panel">
+      <div class="panel with-divider">
         <section class="main-section">
           <h2>Enter the Meal Details</h2>
           <form ng-submit="submitForm()" name="priceForm" novalidate>
@@ -20,8 +20,8 @@
               <div ng-show="checkError('base_price')" class="error">Please place a valid number </div>
             </div>
             <div class="form-group">
-              <label class="control-label">Tax Rate (%)</label><i class="tip">Just input this once, we'll remember it until you change it again!</i>
-              <input type="number" ng-model="data.tax_rate" required name="tax_rate" class="form-control">
+              <label class="control-label">Tax Rate (%)</label>
+              <input type="number" ng-model="data.tax_rate" required name="tax_rate" class="form-control"><i class="tip">Just type this once, we'll remember it until you change it!</i>
               <div ng-show="checkError('tax_rate')" class="error">Please place a valid number</div>
             </div>
             <div class="form-group">
@@ -57,8 +57,8 @@
           <dt>Average Tip Per meal</dt>
           <dd>{{ data.average_tip_per_meal | currency }}</dd>
         </dl>
+        <button id="btn-reset" ng-click="resetApp()" class="btn">Reset</button>
       </div>
-      <button ng-click="resetApp()" class="btn pull-right">Reset</button>
     </div>
     <script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.21/angular.min.js"></script>

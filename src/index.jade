@@ -12,7 +12,7 @@ html(ng-app="calcApp")
       header
         h1 TipiCal
 
-      .panel
+      .panel.with-divider
         section.main-section
           h2 Enter the Meal Details
           form(ng-submit="submitForm()", name="priceForm", novalidate)
@@ -23,8 +23,8 @@ html(ng-app="calcApp")
 
             .form-group
               label.control-label Tax Rate (%)
-              i.tip Just input this once, we'll remember it until you change it again!
               input.form-control(type="number", ng-model="data.tax_rate", required, name="tax_rate")
+              i.tip Just type this once, we'll remember it until you change it!
               .error(ng-show="checkError('tax_rate')") Please place a valid number
 
             .form-group
@@ -63,7 +63,7 @@ html(ng-app="calcApp")
           dt Average Tip Per meal
           dd {{ data.average_tip_per_meal | currency }}
 
-      button.btn.pull-right(ng-click="resetApp()") Reset
+        button.btn#btn-reset(ng-click="resetApp()") Reset
 
 
     script(src="http://code.jquery.com/jquery-2.0.3.min.js")
