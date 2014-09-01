@@ -24,6 +24,8 @@ angular.module('calcApp',[])
         $scope.updateTipCollection();
         $scope.calcTotalTip();
         $scope.calcAverageTip();
+        $scope.data.base_price     = 0;
+        $scope.data.tip_percentage = 0;
       }
     };
 
@@ -77,8 +79,12 @@ angular.module('calcApp',[])
       $scope.priceForm.$setPristine();
     };
 
-    $scope.checkError = function(formItemName){
+    $scope.checkRequired = function(formItemName){
       return $scope.$eval('submitted && priceForm.'+formItemName+'.$error.required');
+    };
+
+    $scope.checkMin = function(formItemName){
+      return $scope.$eval('submitted && priceForm.'+formItemName+'.$error.min');
     };
 
   });

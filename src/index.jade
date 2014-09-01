@@ -19,18 +19,18 @@ html(ng-app="calcApp")
             .form-group
               label.control-label Base Meal Price ($)
               input.form-control(type="number", ng-model="data.base_price", required, name="base_price")
-              .error(ng-show="checkError('base_price')") Please place a valid number 
+              .error(ng-show="checkRequired('base_price')") Please enter the base meal price
 
             .form-group
               label.control-label Tax Rate (%)
               input.form-control(type="number", ng-model="data.tax_rate", required, name="tax_rate")
               i.tip Just type this once, we'll remember it until you change it!
-              .error(ng-show="checkError('tax_rate')") Please place a valid number
+              .error(ng-show="checkRequired('tax_rate')") Please place a valid number
 
             .form-group
               label.control-label Tip Percentage (%)
               input.form-control(type="number", ng-model="data.tip_percentage", required, name="tip_percentage")
-              .error(ng-show="checkError('tip_percentage')") Please place a valid number 
+              .error(ng-show="checkRequired('tip_percentage')") Please place a valid number 
 
             .form-group.form-actions
               input.btn.btn-primary(type="submit", value="Submit") Submit
@@ -49,8 +49,9 @@ html(ng-app="calcApp")
 
             dt.total Total
             dd.total {{ data.meal_total | currency}}
+          
 
-      .panel.primary
+      .panel.primary(ng-class="{'callout':submitted}")
         h2 My Earnings Info
         dl
 
@@ -67,5 +68,7 @@ html(ng-app="calcApp")
 
 
     script(src="http://code.jquery.com/jquery-2.0.3.min.js")
+    script(src="http://cdnjs.cloudflare.com/ajax/libs/velocity/0.11.9/jquery.velocity.min.js")
     script(src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.21/angular.min.js")
     script(src="js/calcApp.js")
+

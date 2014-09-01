@@ -90,6 +90,9 @@ dd
   overflow      auto
   box-shadow    0 2px 0 rgba(0,0,0, .2)
 
+  &.callout
+    animation scaler 0.2s ease-out
+
   @media (min-width:640px)
     float left
     width 60%
@@ -168,3 +171,11 @@ dd
 .total
   font-weight bold
   color       #000
+
+@keyframes scaler
+  0%
+    transform scale(1,1)
+  50%
+    transform scale(1.2, 1.2)
+  100%
+    transform scale(1,1)  
