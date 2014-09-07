@@ -17,19 +17,19 @@ html(ng-app="calcApp")
           form(ng-submit="submitForm()", name="priceForm", novalidate)
             .form-group
               label.control-label Base Meal Price ($)
-              input.form-control(type="number", ng-model="data.base_price", min="1", name="base_price")
-              .error(ng-show="checkMin('base_price')") Please enter at least $1
+              input.form-control(type="number", ng-model="data.base_price",  min="1", name="base_price", value="0")
+              .error(ng-show="submitted && checkMin('base_price')") Please enter at least $1
 
             .form-group
               label.control-label Tax Rate (%)
               input.form-control(type="number", ng-model="data.tax_rate", required, name="tax_rate")
               i.tip Just type this once, we'll remember it until you change it!
-              .error(ng-show="checkRequired('tax_rate')") Please place a valid number
+              .error(ng-show="submitted && checkRequired('tax_rate')") Please place a valid number
 
             .form-group
               label.control-label Tip Percentage (%)
               input.form-control(type="number", ng-model="data.tip_percentage", required, name="tip_percentage")
-              .error(ng-show="checkRequired('tip_percentage')") Please place a valid number
+              .error(ng-show="submitted && checkRequired('tip_percentage')") Please place a valid number
 
             .form-group.form-actions
               button.btn.btn-primary(type="submit", value="Submit") Submit
@@ -54,15 +54,15 @@ html(ng-app="calcApp")
         dl
 
           dt Tip Total
-          dd {{ data.tip_total | currency}}
+          dd.highlight {{ data.tip_total | currency}}
 
           dt Meal Count
           dd {{ data.meal_count}}
 
           dt Average Tip Per meal
-          dd {{ data.average_tip_per_meal | currency }}
+          dd.highlight {{ data.tip_average | currency }}
 
-        button.btn#btn-reset(ng-click="resetApp()") Reset
+        button.btn#btn-reset(type="button", ng-click="resetApp()") Reset
 
 
     script(src="http://code.jquery.com/jquery-2.0.3.min.js")

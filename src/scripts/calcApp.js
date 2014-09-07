@@ -2,36 +2,34 @@ angular.module('calcApp',[])
   .controller('calcCtrl', function($scope){
     $scope.submitted = false;
 
-    var data = $scope.data ={
+    var data = $scope.data = {
       base_price:           0,
       tax_rate:             0,
       tip_percentage:       0,
       tip:                  0,
       tip_total:            0,
-      tip_collection:       [],
+      tip_average:          0,
       meal_count:           0,
       customer_subtotal:    0,
-      meal_total:           0,
-      average_tip_per_meal: 0
+      meal_total:           0
     };
 
     var calcCustomerCharge = function(){
       if($scope.priceForm.$valid){
         $scope.submitted = false;
         calcSubTotal();
+        calcMealTotal();
         increaseMealCount();
         calcTip();
-        calcMealTotal();
-        updateTipCollection();
         calcTotalTip();
-        calcAverageTip();
+        calcTipAverage();
         data.base_price = 0;
         data.tip_percentage = 0;
       }
     };
 
     var calcSubTotal =function(){
-      data.customer_subtotal = data.base_price + (10 * (data.tax_rate/100));
+      data.customer_subtotal = data.base_price + (data.base_price * (data.tax_rate/100));
     };
 
     var increaseMealCount = function(){
@@ -39,34 +37,25 @@ angular.module('calcApp',[])
     };
 
     var calcMealTotal = function(){
-      data.meal_total = data.base_price + (10 * (data.tax_rate/100)) + data.tip;
+      data.meal_total = data.base_price + (data.base_price * (data.tax_rate/100)) + data.tip;
     };
 
-    var updateTipCollection = function(){
-      data.tip_collection.push(data.tip);
-    };
 
     var calcTip = function(){
       data.tip = data.base_price * (data.tip_percentage/100);
     };
 
     var calcTotalTip = function(){
-      //For Jon, why doesn't the commented part down there work?
-      var total = 0;
-      for(var i=0, len = data.tip_collection.length ; i < len; i++){
-        // data.tip_total += data.tip_collection[i];
-        total += data.tip_collection[i];
-      }
-      data.tip_total = total;
+      data.tip_total += data.tip;
     };
 
-    var calcAverageTip = function(){
-      data.average_tip_per_meal = (data.tip_total/data.tip_collection.length);
+    var calcTipAverage = function(){
+      data.tip_average = data.tip_total/data.meal_count;
     };
 
     $scope.submitForm = function(){
-        $scope.submitted = true;
-        calcCustomerCharge();
+      $scope.submitted = true;
+      calcCustomerCharge();
     };
 
     $scope.cancelInfo = function(){
@@ -77,9 +66,13 @@ angular.module('calcApp',[])
     };
 
     $scope.resetApp = function(){
-      data      = {};
-      $scope.submitted = false;
-      $scope.priceForm.$setPristine();
+      $scope.cancelInfo();
+      data.tip               = 0;
+      data.tip_total         = 0;
+      data.tip_average       = 0;
+      data.meal_count        = 0;
+      data.customer_subtotal = 0;
+      data.meal_total        = 0;
     };
 
     $scope.checkRequired = function(formItemName){

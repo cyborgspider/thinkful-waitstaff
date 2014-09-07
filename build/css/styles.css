@@ -40,6 +40,8 @@ dd{float:right}
 .btn#btn-reset{float:right;margin-top:20px}
 .text-center{text-align:center}
 .total{font-weight:bold;color:#000}
+.highlight{-webkit-transition:color 0.1s ease-out, font-size 0.1s ease-out;-moz-transition:color 0.1s ease-out, font-size 0.1s ease-out;-o-transition:color 0.1s ease-out, font-size 0.1s ease-out;-ms-transition:color 0.1s ease-out, font-size 0.1s ease-out;transition:color 0.1s ease-out, font-size 0.1s ease-out;text-align:right;}
+.highlight.active{color:#328619;font-size:120%}
 @-moz-keyframes scaler{0%{-webkit-transform:scale(1,1);-moz-transform:scale(1,1);-o-transform:scale(1,1);-ms-transform:scale(1,1);transform:scale(1,1)}
 50%{-webkit-transform:scale(1.2,1.2);-moz-transform:scale(1.2,1.2);-o-transform:scale(1.2,1.2);-ms-transform:scale(1.2,1.2);transform:scale(1.2,1.2)}
 100%{-webkit-transform:scale(1,1);-moz-transform:scale(1,1);-o-transform:scale(1,1);-ms-transform:scale(1,1);transform:scale(1,1)}

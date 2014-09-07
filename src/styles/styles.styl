@@ -172,6 +172,14 @@ dd
   font-weight bold
   color       #000
 
+.highlight
+  transition color 0.1s ease-out, font-size 0.1s ease-out
+  text-align right
+
+  &.active
+    color     $green
+    font-size 120%
+
 @keyframes scaler
   0%
     transform scale(1,1)
