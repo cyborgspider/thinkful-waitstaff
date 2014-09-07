@@ -2,7 +2,7 @@ angular.module('calcApp',[])
   .controller('calcCtrl', function($scope){
     $scope.submitted = false;
 
-    $scope.data ={
+    var data = $scope.data ={
       base_price:           0,
       tax_rate:             0,
       tip_percentage:       0,
@@ -15,66 +15,69 @@ angular.module('calcApp',[])
       average_tip_per_meal: 0
     };
 
-    $scope.calcCustomerCharge = function(){
+    var calcCustomerCharge = function(){
       if($scope.priceForm.$valid){
-        $scope.calcSubTotal();
-        $scope.increaseMealCount();
-        $scope.calcTip();
-        $scope.calcMealTotal();
-        $scope.updateTipCollection();
-        $scope.calcTotalTip();
-        $scope.calcAverageTip();
-        $scope.data.base_price     = 0;
-        $scope.data.tip_percentage = 0;
+        $scope.submitted = false;
+        calcSubTotal();
+        increaseMealCount();
+        calcTip();
+        calcMealTotal();
+        updateTipCollection();
+        calcTotalTip();
+        calcAverageTip();
+        data.base_price = 0;
+        data.tip_percentage = 0;
       }
     };
 
-    $scope.calcSubTotal = function(){
-      $scope.data.customer_subtotal = $scope.data.base_price + (10 * ($scope.data.tax_rate/100));
+    var calcSubTotal =function(){
+      data.customer_subtotal = data.base_price + (10 * (data.tax_rate/100));
     };
 
-    $scope.increaseMealCount = function(){
-      $scope.data.meal_count = $scope.data.meal_count+1;
+    var increaseMealCount = function(){
+      data.meal_count += 1;
     };
 
-    $scope.calcMealTotal = function(){
-      $scope.data.meal_total = $scope.data.base_price + (10 * ($scope.data.tax_rate/100)) + $scope.data.tip;
+    var calcMealTotal = function(){
+      data.meal_total = data.base_price + (10 * (data.tax_rate/100)) + data.tip;
     };
 
-    $scope.updateTipCollection = function(){
-      $scope.data.tip_collection.push($scope.data.tip);
+    var updateTipCollection = function(){
+      data.tip_collection.push(data.tip);
     };
 
-    $scope.calcTip = function(){
-      $scope.data.tip = $scope.data.base_price * ($scope.data.tip_percentage/100);
+    var calcTip = function(){
+      data.tip = data.base_price * (data.tip_percentage/100);
     };
 
-    $scope.calcTotalTip = function(){
-      //For John, why doesn't the commented part down there work?
+    var calcTotalTip = function(){
+      //For Jon, why doesn't the commented part down there work?
       var total = 0;
-      for(var i=0, len = $scope.data.tip_collection.length ; i < len; i++){
-        // $scope.data.tip_total += $scope.data.tip_collection[i];
-        total += $scope.data.tip_collection[i];
+      for(var i=0, len = data.tip_collection.length ; i < len; i++){
+        // data.tip_total += data.tip_collection[i];
+        total += data.tip_collection[i];
       }
-      $scope.data.tip_total = total;
+      data.tip_total = total;
     };
 
-    $scope.calcAverageTip = function(){
-      $scope.data.average_tip_per_meal = ($scope.data.tip_total/$scope.data.tip_collection.length);
+    var calcAverageTip = function(){
+      data.average_tip_per_meal = (data.tip_total/data.tip_collection.length);
     };
 
     $scope.submitForm = function(){
         $scope.submitted = true;
-        $scope.calcCustomerCharge();
+        calcCustomerCharge();
     };
 
     $scope.cancelInfo = function(){
-      $scope.submitted = false;
-      $scope.priceForm.$setPristine();
+      $scope.submitted    = false;
+      data.base_price     = 0;
+      data.tax_rate       = 0;
+      data.tip_percentage = 0;
     };
 
     $scope.resetApp = function(){
-      $scope.data      = {};
+      data      = {};
       $scope.submitted = false;
       $scope.priceForm.$setPristine();
     };
