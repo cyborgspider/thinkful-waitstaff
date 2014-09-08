@@ -6,63 +6,18 @@
     <link href="css/styles.css" rel="stylesheet">
   </head>
   <body>
-    <div ng-controller="calcCtrl" class="container">
+    <div class="container">
       <header>
         <h1>TipiCal</h1>
       </header>
-      <div class="panel with-divider">
-        <section class="main-section">
-          <h2>Enter the Meal Details</h2>
-          <form ng-submit="submitForm()" name="priceForm" novalidate>
-            <div class="form-group">
-              <label class="control-label">Base Meal Price ($)</label>
-              <input type="number" ng-model="data.base_price" min="1" name="base_price" value="0" class="form-control">
-              <div ng-show="submitted &amp;&amp; checkMin('base_price')" class="error">Please enter at least $1</div>
-            </div>
-            <div class="form-group">
-              <label class="control-label">Tax Rate (%)</label>
-              <input type="number" ng-model="data.tax_rate" required name="tax_rate" class="form-control"><i class="tip">Just type this once, we'll remember it until you change it!</i>
-              <div ng-show="submitted &amp;&amp; checkRequired('tax_rate')" class="error">Please place a valid number</div>
-            </div>
-            <div class="form-group">
-              <label class="control-label">Tip Percentage (%)</label>
-              <input type="number" ng-model="data.tip_percentage" required name="tip_percentage" class="form-control">
-              <div ng-show="submitted &amp;&amp; checkRequired('tip_percentage')" class="error">Please place a valid number</div>
-            </div>
-            <div class="form-group form-actions">
-              <button type="submit" value="Submit" class="btn btn-primary">Submit</button>
-              <button type="button" ng-click="cancelInfo()" class="btn">Cancel</button>
-            </div>
-          </form>
-        </section>
-        <section class="sidebar">
-          <h2>Customer Charges</h2>
-          <dl>
-            <dt>Subtotal</dt>
-            <dd>{{ data.customer_subtotal | currency }}</dd>
-            <dt>Tip</dt>
-            <dd>{{ data.tip | currency }}</dd>
-            <dt class="total">Total</dt>
-            <dd class="total">{{ data.meal_total | currency}}</dd>
-          </dl>
-        </section>
-      </div>
-      <div class="panel primary">
-        <h2>My Earnings Info</h2>
-        <dl>
-          <dt>Tip Total</dt>
-          <dd class="highlight">{{ data.tip_total | currency}}</dd>
-          <dt>Meal Count</dt>
-          <dd>{{ data.meal_count}}</dd>
-          <dt>Average Tip Per meal</dt>
-          <dd class="highlight">{{ data.tip_average | currency }}</dd>
-        </dl>
-        <button id="btn-reset" type="button" ng-click="resetApp()" class="btn">Reset</button>
-      </div>
+      <nav><a href="#/home">Home</a><a href="#/new_meal">New Meal</a><a href="#/my_earnings">My Earnings</a></nav>
+      <div ui-view></div>
     </div>
     <script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/velocity/0.11.9/jquery.velocity.min.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.21/angular.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.21/angular-animate.js"></script>
+    <script src="http://angular-ui.github.io/ui-router/release/angular-ui-router.min.js"></script>
     <script src="js/calcApp.js"></script>
   </body>
 </html>

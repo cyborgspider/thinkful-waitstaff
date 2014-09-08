@@ -1,0 +1,14 @@
+.panel.primary(ng-controller="CalcCtrl")
+  h2 My Earnings Info
+  dl
+
+    dt Tip Total
+    dd.highlight {{ data.tip_total | currency}}
+
+    dt Meal Count
+    dd {{ data.meal_count}}
+
+    dt Average Tip Per meal
+    dd.highlight {{ data.tip_average | currency }}
+
+  button.btn#btn-reset(type="button", ng-click="resetApp()") Reset

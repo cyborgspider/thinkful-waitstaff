@@ -1,0 +1,36 @@
+.panel.with-divider(ng-controller="CalcCtrl")
+  section.main-section
+    h2 Enter the Meal Details
+    form(ng-submit="submitForm()", name="priceForm", novalidate)
+      .form-group
+        label.control-label Base Meal Price ($)
+        input.form-control(type="number", ng-model="data.base_price",  min="1", name="base_price", value="0")
+        .error(ng-show="submitted && checkMin('base_price')") Please enter at least $1
+
+      .form-group
+        label.control-label Tax Rate (%)
+        input.form-control(type="number", ng-model="data.tax_rate", required, name="tax_rate")
+        i.tip Just type this once, we'll remember it until you change it!
+        .error(ng-show="submitted && checkRequired('tax_rate')") Please place a valid number
+
+      .form-group
+        label.control-label Tip Percentage (%)
+        input.form-control(type="number", ng-model="data.tip_percentage", required, name="tip_percentage")
+        .error(ng-show="submitted && checkRequired('tip_percentage')") Please place a valid number
+
+      .form-group.form-actions
+        button.btn.btn-primary(type="submit", value="Submit") Submit
+        button.btn(type="button", ng-click="cancelInfo()") Cancel
+
+  section.sidebar
+    h2 Customer Charges
+    dl
+
+      dt Subtotal
+      dd {{ data.customer_subtotal | currency }}
+
+      dt Tip
+      dd {{ data.tip | currency }}
+
+      dt.total Total
+      dd.total {{ data.meal_total | currency}}

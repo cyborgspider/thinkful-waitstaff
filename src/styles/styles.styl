@@ -10,6 +10,21 @@ $green       = #328619
 $green_dark  = #19370F
 $green_light = #D7F3CE
 
+div[ui-view]
+  transition all 0.2s ease-out
+
+  &.ng-enter
+    opacity 0
+
+  &.ng-enter-active
+    opacity 1
+
+  &.ng-leave
+    opacity 1
+
+  &.ng-leave-active
+    opacity 0
+
 html
 body
   font-size 100%
@@ -32,6 +47,9 @@ h2
   font-weight bold
   color       $green_dark
   padding     1rem 0
+
+p
+  margin-bottom 1.25rem
 
 .container
   margin    0 auto
@@ -93,17 +111,12 @@ dd
   &.callout
     animation scaler 0.2s ease-out
 
-  @media (min-width:640px)
-    float left
-    width 60%
-
   &.primary
-    @media (min-width:640px)
-      width       38%
-      margin-left 2%
+    width  60%
+    margin 0 auto
 
   &.with-divider
-    &:before      
+    &:before
       @media (min-width:878px)
         position   absolute
         top        0
@@ -124,7 +137,7 @@ dd
 
 .main-section
   @media (min-width:878px)
-    float         left  
+    float         left
     width         50%
     padding-right 1.5rem
 
@@ -164,6 +177,13 @@ dd
     float      right
     margin-top 20px
 
+nav
+  text-align center
+
+  & > a
+    display      inline-block
+    margin-right 12px
+
 /* UTILITY*/
 .text-center
   text-align center
@@ -186,4 +206,4 @@ dd
   50%
     transform scale(1.2, 1.2)
   100%
-    transform scale(1,1)  
+    transform scale(1,1)

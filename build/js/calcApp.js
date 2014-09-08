@@ -1,5 +1,27 @@
-angular.module('calcApp',[])
-  .controller('calcCtrl', function($scope){
+angular.module('calcApp',['ui.router','ngAnimate'])
+  .config(function($stateProvider, $urlRouterProvider){
+    $urlRouterProvider.otherwise('/home');
+
+    $stateProvider
+      .state('home', {
+        url: '/home',
+        templateUrl: 'home.html',
+      })
+
+      .state('new_meal', {
+        url: '/new_meal',
+        templateUrl: 'new_meal.html',
+        controller: 'CalcCtrl'
+      })
+
+      .state('my_earnings', {
+        url: '/my_earnings',
+        templateUrl: 'my_earnings.html',
+        controller: 'CalcCtrl'
+      })
+  })
+
+  .controller('CalcCtrl', function($scope){
     $scope.submitted = false;
 
     var data = $scope.data = {

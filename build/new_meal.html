@@ -1,0 +1,38 @@
+
+<div ng-controller="CalcCtrl" class="panel with-divider">
+  <section class="main-section">
+    <h2>Enter the Meal Details</h2>
+    <form ng-submit="submitForm()" name="priceForm" novalidate="novalidate">
+      <div class="form-group">
+        <label class="control-label">Base Meal Price ($)</label>
+        <input type="number" ng-model="data.base_price" min="1" name="base_price" value="0" class="form-control"/>
+        <div ng-show="submitted &amp;&amp; checkMin('base_price')" class="error">Please enter at least $1</div>
+      </div>
+      <div class="form-group">
+        <label class="control-label">Tax Rate (%)</label>
+        <input type="number" ng-model="data.tax_rate" required="required" name="tax_rate" class="form-control"/><i class="tip">Just type this once, we'll remember it until you change it!</i>
+        <div ng-show="submitted &amp;&amp; checkRequired('tax_rate')" class="error">Please place a valid number</div>
+      </div>
+      <div class="form-group">
+        <label class="control-label">Tip Percentage (%)</label>
+        <input type="number" ng-model="data.tip_percentage" required="required" name="tip_percentage" class="form-control"/>
+        <div ng-show="submitted &amp;&amp; checkRequired('tip_percentage')" class="error">Please place a valid number</div>
+      </div>
+      <div class="form-group form-actions">
+        <button type="submit" value="Submit" class="btn btn-primary">Submit</button>
+        <button type="button" ng-click="cancelInfo()" class="btn">Cancel</button>
+      </div>
+    </form>
+  </section>
+  <section class="sidebar">
+    <h2>Customer Charges</h2>
+    <dl>
+      <dt>Subtotal</dt>
+      <dd>{{ data.customer_subtotal | currency }}</dd>
+      <dt>Tip</dt>
+      <dd>{{ data.tip | currency }}</dd>
+      <dt class="total">Total</dt>
+      <dd class="total">{{ data.meal_total | currency}}</dd>
+    </dl>
+  </section>
+</div>
