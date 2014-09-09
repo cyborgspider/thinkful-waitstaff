@@ -51,11 +51,11 @@
         <h2>My Earnings Info</h2>
         <dl>
           <dt>Tip Total</dt>
-          <dd class="highlight">{{ data.tip_total | currency}}</dd>
+          <dd ng-class="{'active':highlightOn}" class="highlight">{{ data.tip_total | currency}}</dd>
           <dt>Meal Count</dt>
           <dd>{{ data.meal_count}}</dd>
           <dt>Average Tip Per meal</dt>
-          <dd class="highlight">{{ data.tip_average | currency }}</dd>
+          <dd ng-class="{'active':highlightOn}" class="highlight">{{ data.tip_average | currency }}</dd>
         </dl>
         <button id="btn-reset" type="button" ng-click="resetApp()" class="btn">Reset</button>
       </div>

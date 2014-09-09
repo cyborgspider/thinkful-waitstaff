@@ -1,6 +1,7 @@
 angular.module('calcApp',[])
-  .controller('calcCtrl', function($scope){
-    $scope.submitted = false;
+  .controller('calcCtrl', function($scope, $timeout){
+    $scope.submitted   = false;
+    $scope.highlightOn = false;
 
     var data = $scope.data = {
       base_price:           0,
@@ -23,6 +24,7 @@ angular.module('calcApp',[])
         calcTip();
         calcTotalTip();
         calcTipAverage();
+        highlight();
         data.base_price = 0;
         data.tip_percentage = 0;
       }
@@ -51,6 +53,14 @@ angular.module('calcApp',[])
 
     var calcTipAverage = function(){
       data.tip_average = data.tip_total/data.meal_count;
+    };
+
+    var highlight = function(){
+      $scope.highlightOn = true;
+      function highlightOff(){
+        $scope.highlightOn = false;
+      };
+      $timeout(highlightOff, 300)
     };
 
     $scope.submitForm = function(){
