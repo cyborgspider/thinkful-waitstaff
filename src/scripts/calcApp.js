@@ -21,10 +21,8 @@ angular.module('calcApp',['ui.router','ngAnimate'])
       })
   })
 
-  .controller('CalcCtrl', function($scope){
-    $scope.submitted = false;
-
-    var data = $scope.data = {
+  .factory('appData', function(){
+    var data = {
       base_price:           0,
       tax_rate:             0,
       tip_percentage:       0,
@@ -35,6 +33,12 @@ angular.module('calcApp',['ui.router','ngAnimate'])
       customer_subtotal:    0,
       meal_total:           0
     };
+    return data;
+  })
+
+  .controller('CalcCtrl', function($scope, appData){
+    $scope.submitted = false;
+    var data = $scope.data = appData;
 
     var calcCustomerCharge = function(){
       if($scope.priceForm.$valid){
